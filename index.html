@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee Blog</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #000000;
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Coffee blog</h1>
+
+    <form id="coffeeForm">
+        <label for="name">Название напитка</label><br>
+        <input type="text" id="name" name="name" value="Американо"><br><br>
+
+        <label for="sort">Сорт кофе</label><br>
+        <select id="sort" name="sort">
+            <option value="Арабика">Арабика</option>
+            <option value="Робуста">Робуста</option>
+        </select><br><br>
+
+        <label>Крепость обжарки</label><br>
+        <input type="radio" id="strong" name="roast" value="Крепкая">
+        <label for="strong">Крепкая</label><br>
+        <input type="radio" id="medium" name="roast" value="Средняя">
+        <label for="medium">Средняя</label><br>
+        <input type="radio" id="light" name="roast" value="Легкая" checked>
+        <label for="light">Легкая</label><br><br>
+
+        <label for="image">Изображение</label><br>
+        <input type="text" id="image" name="image" value="https://upload.wikimedia.org/..."><br><br>
+
+        <label for="price">Стоимость напитка</label>
+        <input type="number" id="price" name="price" value="150"><br><br>
+
+        <label for="description">Описание</label>
+        <textarea id="description" name="description">Какое утро без кофе???</textarea><br><br>
+
+        <button type="button" onclick="addDrink()">Добавить напиток</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Изображение</th>
+                <th>Название</th>
+                <th>Сорт</th>
+                <th>Крепость обжарки</th>
+                <th>Стоимость</th>
+                <th>Описание</th>
+            </tr>
+        </thead>
+        <tbody id="coffeeTableBody">
+            <tr>
+                <td><img src="https://upload.wikimedia.org/.../Americano.jpg" alt="Американо" width="50"></td>
+                <td>Американо</td>
+                <td>Арабика</td>
+                <td>1</td>
+                <td>150</td>
+                <td>Какое утро без кофе???</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        function addDrink() {
+            const name = document.getElementById('name').value;
+            const sort = document.getElementById('sort').value;
+            const roast = document.querySelector('input[name="roast"]:checked').value;
+            const price = document.getElementById('price').value;
+            const description = document.getElementById('description').value;
+            const image = document.getElementById('image').value;
+
+            const tableBody = document.getElementById('coffeeTableBody');
+            const newRow = document.createElement('tr');
+
+            newRow.innerHTML = `
+                <td><img src="${image}" alt="${name}" width="50"></td>
+                <td>${name}</td>
+                <td>${sort}</td>
+                <td>${roast}</td>
+                <td>${price}</td>
+                <td>${description}</td>
+            `;
+
+            tableBody.appendChild(newRow);
+        }
+    </script>
+
+</body>
+</html>
